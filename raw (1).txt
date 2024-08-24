@@ -2854,28 +2854,10 @@ function RedeemCode(value)
             RedeemCode(v)
         end
         end
-    })
-    Tabs.Sh:AddButton({
-        Title = "Teleport Sea 1",
-        Description = "faster teleport to old world with 1 click",
-        Callback = function()            
-game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelMain")
-        end
-    })
-    Tabs.Sh:AddButton({
-        Title = "Teleport Sea 2",
-        Description = "faster teleport to new world with 1 click",
-        Callback = function()            
-game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
-        end
-    })
-    Tabs.Sh:AddButton({
-        Title = "Teleport Sea 3",
-        Description = "faster teleport to third world with 1 click",
-        Callback = function()            
-game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
-        end
-    })
+    }) 
+    Tabs.Sh:AddLabel
+    Title = "Fighting Style",
+    Description ="",
     Tabs.Sh:AddSection("Mele Store") 
     local melees = {
     ["Select"] = function() end,
