@@ -2980,6 +2980,7 @@ game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardRewa
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Refund","2")
         end
     })
+    Toggle = Tabs.Sh:AddToggle("MyToggle", {Title = "Auto Buy Haki", Description = "", Default = false })
     Toggle = Tabs.Settings:AddToggle("MyToggle", {Title = "Hide Mobs", Description = "invisible monster for have better fps", Default = true })
     Toggle:OnChanged(function(Value)
         _G.hadesinvis = Value		
