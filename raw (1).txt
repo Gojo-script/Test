@@ -2919,7 +2919,7 @@ game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
 local Chon_Melee = Tabs.Sh:AddDropdown("Chon_Melee", {
     Title = "Buy Fighting Style",
     Description = "",
-    Values = {"Select", "Black Leg", "Electro", "Fishman Karate", "Dragon Claw", "Superhuman", "Death Step", "Sharkman Karate", "Electric Claw", "Dragon Talon", "Godhuman" },
+    Values = {"Select", "Black Leg", "Electro", "Fishman Karate", "Dragon Claw", "Superhuman", "Death Step", "Sharkman Karate", "Electric Claw", "Dragon Talon", "Godhuman","SanguineArt"},
     Multi = false,
     Default = 1,
 })
@@ -2980,10 +2980,9 @@ game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardRewa
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Refund","2")
         end
     })
-    if Second_Sea or Third_Sea then
-    local ToggleHakiColor = Tabs.Sh:AddToggle("ToggleHakiColor", {Title = "Auto Buy Haki Color",Description = "",Default = false })
+    Toggle = Tabs.Sh:AddToggle("MyToggle",{Title = "Auto Buy Cloar Haki",Description = "", Default = false })
     ToggleHakiColor:OnChanged(function(Value)
-        _G.Auto_Buy_Enchancement = Value
+    _G.Auto_Buy_Enchancement = Value
     end)
         Options.ToggleHakiColor:SetValue(false)
     spawn(function()
