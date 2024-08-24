@@ -2984,7 +2984,7 @@ game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardRewa
     Toggle:OnChanged(function(Value)
     _G.Auto_Buy_Enchancement = Value
     end)
-        Options.ToggleHakiColor:SetValue(false)
+        Options.Toggle:OnChanged:SetValue(false)
     spawn(function()
             while wait() do
                 if _G.Auto_Buy_Enchancement then
