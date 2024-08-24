@@ -2980,24 +2980,6 @@ game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardRewa
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Refund","2")
         end
     })
-    Toggle = Tabs.Sh:AddToggle("MyToggle", {Title = "Auto Buy Haki", Default = _G.Auto_Buy_Enchancement })
-    Toggle:OnChanged(function(Value)
-    _G.Auto_Buy_Enchancement = Value
-    end)
-        Options.Toggle:OnChanged:SetValue(false)
-    spawn(function()
-            while wait() do
-                if _G.Auto_Buy_Enchancement then
-                    local args = {
-                        [1] = "ColorsDealer",
-                        [2] = "2"
-                    }
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-                end 
-            end
-        end)
-end
-
     Toggle = Tabs.Settings:AddToggle("MyToggle", {Title = "Hide Mobs", Description = "invisible monster for have better fps", Default = true })
     Toggle:OnChanged(function(Value)
         _G.hadesinvis = Value		
@@ -9085,7 +9067,7 @@ Toggle:OnChanged(function(Value)
 _G.Hop = Value
 saveSettings()
 end) 
-Toggle = Tabs.stack:AddToggle("MyToggle", {Title = "Auto Buy Legends Sword", Default = _G.AutoBuyLegendarySword})
+Toggle = Tabs.Sh:AddToggle("MyToggle", {Title = "Auto Buy Legends Sword", Default = _G.AutoBuyLegendarySword})
 Toggle:OnChanged(function(Value)
     _G.AutoBuyLegendarySword = Value
     saveSettings()
