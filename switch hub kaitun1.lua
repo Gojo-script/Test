@@ -52,34 +52,12 @@ getgenv().Melee = { -- Farm Melee / ฟามหมัด
     ['Godhuman'] = _G.Melee['Godhuman']
 }
 
-getgenv().Sword = {
-        ['Saber'] = true,
-        ['Midnight Blade'] = true,
-        ['Shisui'] = true,
-        ['Saddi'] = true,
-        ['Wando'] = true,
-        ['Yama'] = true,
-        ['Koko'] = false,
-        ['Rengoku'] = true,
-        ['Canvander'] = true,
-        ['Buddy Sword'] = true,
-        ['Twin Hooks'] = true,
-        ['Spikey Trident'] = true,
-        ['Hallow Scythe'] = true,
-        ['Dark Dagger'] = true,
-        ['True Triple Katana'] = true,
-		['Cursed Dual Katana'] = true,
-},
-
-getgenv().Gun = { -- ฟามปืน
-         ['Kabucha'] = true,
-         ['Acidum Rifle'] = true,
-         ['Soul Guitar'] = true,
-         ['Serpent Bow'] = true,
-}
-
 getgenv().Sword = _G.Sword 
+
+}
 getgenv().Gun = _G.Gun
+
+}
 getgenv().Mastery = { -- Farm Mastery / ฟามมาสเตอรี่
     ['Melee'] = _G.Mastery['Melee'],
     ['Fruit'] = _G.Mastery['Fruit'],
@@ -104,6 +82,7 @@ getgenv().Mastery = { -- Farm Mastery / ฟามมาสเตอรี่
 		[16] = 'Wando'
     },
 
+getgenv().Gun = _G.Gun
     ['Gun'] = true,
     ['Setting Gun'] = { 
         [1] = 'Soul Guitar',
