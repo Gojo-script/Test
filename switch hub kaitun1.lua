@@ -80,7 +80,7 @@ getgenv().Mastery = { -- Farm Mastery / ฟามมาสเตอรี่
 		[16] = 'Wando'
     },
 
-    ['Gun'] = false,
+    ['Gun'] = true,
     ['Setting Gun'] = { 
         [1] = 'Soul Guitar',
         [2] = 'Kabucha',
