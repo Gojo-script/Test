@@ -2854,11 +2854,7 @@ function RedeemCode(value)
             RedeemCode(v)
         end
         end
-    }) 
-    Tabs.Sh:AddLabel
-    Title = "Fighting Style",
-    Description ="",
-    }) 
+    })
     Tabs.Sh:AddSection("Mele Store") 
     local melees = {
     ["Select"] = function() end,
