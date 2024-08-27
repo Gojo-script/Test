@@ -2876,7 +2876,10 @@ game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressros
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
         end
     })
-    
+    Tabs.Sh:AddLabel({
+        Title = Fighting Style
+        Description = "",
+        )}
     Tabs.Sh:AddSection("Mele Store") 
     local melees = {
     ["Select"] = function() end,
@@ -9166,7 +9169,6 @@ spawn(function()
         end
     end)
     Toggle = Tabs.stack:AddToggle("MyToggle", {Title = "Auto CDK┊New Update", Default = _G.Auto_Cursed_Dual_Katana })
-
     Toggle:OnChanged(function(Value)
        _G.Auto_Cursed_Dual_Katana = Value
         saveSettings()
@@ -9299,7 +9301,6 @@ spawn(function()
             end)
         end
     end)
-
     spawn(function()
         while wait() do
             if Auto_Quest_Yama_1 then
