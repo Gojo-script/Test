@@ -2878,7 +2878,6 @@ game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
     })
     Tabs.Sh:AddLabel({
         Title = Fighting Style
-        Description = "",
         )}
     Tabs.Sh:AddSection("Mele Store") 
     local melees = {
