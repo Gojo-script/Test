@@ -9169,9 +9169,11 @@ spawn(function()
        _G.Auto_Cursed_Dual_Katana = Value
         saveSettings()
         end)
-        spawn(function()
-        while wait() do
-       if _G.Auto_Cursed_Dual_Katana then
+        local Auto_Cursed_Dual_Katana = true
+       function QuestGood3()
+    for v50, v51 in pairs(getnilinstances()) do
+        if v51.Name:match("Luxury Boat Dealer") then
+            plr.Character.HumanoidRootPart.CFrame = v51.HumanoidRootPart.CFrame
             local args = {
                 [1] = "CDKQuest",
                 [2] = "BoatQuest",
@@ -9425,13 +9427,13 @@ function GetCDK()
         end
         getgenv().Good = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("CDKQuest", "Progress", "Good").Good
         getgenv().Evil = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("CDKQuest", "Progress", "Good").Evil
-        if _G.Auto_Cursed_Dual_Katana then 
+        if Auto_Cursed_Dual_Katana then 
             game.ReplicatedStorage.Remotes.CommF_:InvokeServer("CDKQuest", "StartTrial", "Good")
         else
             game.ReplicatedStorage.Remotes.CommF_:InvokeServer("CDKQuest", "StartTrial", "Evil")
         end
         if getgenv().Good == 4 then
-            _G.Auto_Cursed_Dual_Katana =  false
+            Auto_Cursed_Dual_Katana =  false
         end
         local Pedestal
         if getgenv().Good == 4 
@@ -9479,7 +9481,7 @@ function GetCDK()
                 end
             end
         end
-        if _G.Auto_Cursed_Dual_Katana then
+        if Auto_Cursed_Dual_Katana then
             if getgenv().Good == -3 then
                 QuestGood3()
             elseif getgenv().Good == -4 then 
