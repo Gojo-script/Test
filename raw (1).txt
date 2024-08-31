@@ -9164,347 +9164,264 @@ spawn(function()
             end
         end
     end)
-    Toggle = Tabs.stack:AddToggle("MyToggle", {Title = "Auto CDK┊New Update", Default = _G.Auto_Cursed_Dual_Katana })
-
+    Toggle = Tabs.stack:AddToggle("MyToggle", {Title = "Auto CDK┊New Update", Default = false })
     Toggle:OnChanged(function(Value)
        _G.Auto_Cursed_Dual_Katana = Value
         saveSettings()
         end)
-        spawn(function()
-        while wait() do
-            pcall(function()
-       function QuestGood3()
-    for v50, v51 in pairs(getnilinstances()) do
-        if v51.Name:match("Luxury Boat Dealer") then
-            plr.Character.HumanoidRootPart.CFrame = v51.HumanoidRootPart.CFrame
-            local args = {
-                [1] = "CDKQuest",
-                [2] = "BoatQuest",
-                [3] = workspace.NPCs:FindFirstChild("Luxury Boat Dealer")
-            }
-            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-        end;
-    end;
-end
-
-function QuestGood4()
-    if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(-5543.5327148438, 313.80062866211, -2964.2585449219)).magnitude > 1000 then
-        toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position,Vector3.new(-5543.5327148438, 313.80062866211, -2964.2585449219),CFrame.new(-5543.5327148438, 313.80062866211, -2964.2585449219))
-    else
-        if DetectMobRaidCastle() then
-            local v = DetectMobRaidCastle()
-            repeat task.wait()
-                sizepart(v)
-                toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position,v.HumanoidRootPart.Position,v.HumanoidRootPart.CFrame*CFrame.new(7,20,0))
-                if (plr.Character.HumanoidRootPart.Position-v.HumanoidRootPart.Position).Magnitude < 50 then
-                    DetectFastAttack()
-                end
-                equiptool(NameWeapon("Sword"))
-            until not v or not v.Parent or v.Humanoid.Health == 0 
+        local function AutoCursedDualKatana()
+  local MasteryYama, MasteryTushita = 1, 1
+  local GoodProgress, EvilProgress = 0, 0
+  local YamaQuest_1, YamaQuest_2, YamaQuest_3
+  local TushitaQuest_1, TushitaQuest_2, TushitaQuest_3
+  local FinalQuest, FarmMastery
+  
+  local Enemies1 = workspace:WaitForChild("Enemies", 9e9)
+  local Enemies2 = ReplicatedStorage
+  local Remote = Enemies2:WaitForChild("Remotes", 9e9):WaitForChild("CommF_", 9e9)
+  local Map = workspace:WaitForChild("Map", 9e9)
+  local Turtle = Map:WaitForChild("Turtle", 9e9)
+  local Cursed = Turtle:WaitForChild("Cursed", 9e9)
+  
+  local function GetYamaEnemies()
+    local Distance = math.huge
+    local NPC = nil
+    local plrChar = Player and Player.Character and Player.Character.PrimaryPart
+    
+    for _,npc in pairs(Enemies1:GetChildren()) do
+      if npc:FindFirstChild("HazeESP") then
+        if plrChar and npc and npc:FindFirstChild("HumanoidRootPart") and (plrChar.Position - npc.HumanoidRootPart.Position).Magnitude <= Distance then
+          Distance = (plrChar.Position - npc.HumanoidRootPart.Position).Magnitude
+          NPC = npc
         end
+      end
     end
-end
-function TourchGood5()
-    local a 
-    if not game:GetService("Workspace").Map.HeavenlyDimension.Torch1:FindFirstChild("mmb") then
-        a = "1"
-    elseif not game:GetService("Workspace").Map.HeavenlyDimension.Torch2:FindFirstChild("mmb") then
-        a = "2"
-    elseif not game:GetService("Workspace").Map.HeavenlyDimension.Torch3:FindFirstChild("mmb") then
-        a = "3"
+    for _,npc in pairs(Enemies2:GetChildren()) do
+      if npc:FindFirstChild("HazeESP") then
+        if plrChar and npc and npc:FindFirstChild("HumanoidRootPart") and (plrChar.Position - npc.HumanoidRootPart.Position).Magnitude <= Distance then
+          Distance = (plrChar.Position - npc.HumanoidRootPart.Position).Magnitude
+          NPC = npc
+        end
+      end
     end
-    return a 
-end
-function Questgood5()
-    if (game:GetService("Workspace")["_WorldOrigin"].Locations["Heavenly Dimension"].Position-plr.Character.HumanoidRootPart.Position).Magnitude < 1000 then
-        if game:GetService("Workspace").Map.HeavenlyDimension.Exit.BrickColor == BrickColor.new("Cloudy grey") then
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.HeavenlyDimension.Exit.CFrame
-            toTarget(game.Players.LocalPlayer.Character.HumanoidRootPart.Position,game:GetService("Workspace").Map.HeavenlyDimension.Exit.Position,game:GetService("Workspace").Map.HeavenlyDimension.Exit.CFrame)
-            return 
-        end			
-        if game.workspace.Enemies:FindFirstChildWhichIsA("Model") then			
-            for i,v in next,game.Workspace.Enemies:GetChildren() do
-                if v:IsA("Model") then 
-                    v.Humanoid.Health = 0
-                    plr.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame*CFrame.new(0,50,0)
-                end
-            end
+    return NPC
+  end
+  
+  local function GetMasteryEnemies()
+    local Distance = math.huge
+    local NPC = nil
+    local plrChar = Player and Player.Character and Player.Character.PrimaryPart
+    
+    for _,npc in pairs(Enemies1:GetChildren()) do
+      if npc.Name == "Reborn Skeleton" or npc.Name == "Living Zombie" or npc.Name == "Demonic Soul" or npc.Name == "Posessed Mummy" then
+        if plrChar and npc and npc:FindFirstChild("HumanoidRootPart") and (plrChar.Position - npc.HumanoidRootPart.Position).Magnitude <= Distance then
+          Distance = (plrChar.Position - npc.HumanoidRootPart.Position).Magnitude
+          NPC = npc
+        end
+      end
+    end
+    return NPC
+  end
+  
+  -- Final Quest
+  task.spawn(function()
+    while getgenv().AutoCursedDualKatana do task.wait()
+      if FinalQuest then
+      end
+    end
+  end)
+  
+  -- Yama Quest 1
+  task.spawn(function()
+    while getgenv().AutoCursedDualKatana do task.wait()
+      if YamaQuest_1 then
+        if not VerifyTool("Yama") then
+          FireRemote("LoadItem", "Yama")
         else
-            local Tourch = TourchGood5()
-            if Tourch then
-                repeat task.wait()
-                    if (plr.Character.HumanoidRootPart.Position-game:GetService("Workspace").Map.HeavenlyDimension["Torch"..Tourch].Position).Magnitude > 5 then
-                        toTarget(game.Players.LocalPlayer.Character.HumanoidRootPart.Position,game:GetService("Workspace").Map.HeavenlyDimension["Torch"..Tourch].Position,game:GetService("Workspace").Map.HeavenlyDimension["Torch"..Tourch].CFrame)
-                    else
-                        fireproximityprompt(game:GetService("Workspace").Map.HeavenlyDimension["Torch"..Tourch].ProximityPrompt,0)
-                        fireproximityprompt(game:GetService("Workspace").Map.HeavenlyDimension["Torch"..Tourch].ProximityPrompt,1)
-                    end 
-                until game.workspace.Enemies:FindFirstChildWhichIsA("Model")
-                plr.Character.HumanoidRootPart.CFrame = plr.Character.HumanoidRootPart.CFrame*CFrame.new(0,50,0)
-                local BV = Instance.new("Part")
-                BV.Parent = game:GetService("Workspace").Map.HeavenlyDimension["Torch"..Tourch]
-                BV.Name = "mmb"
-            end
+          local NPC = Enemies:FindFirstChild("Ghost")EquipToolName("Yama")
+          
+          if NPC and NPC:FindFirstChild("HumanoidRootPart") then
+            PlayerTP(NPC.HumanoidRootPart.CFrame * CFrame.new(0, 0, 2))
+          else
+            PlayerTP(CFrame.new(5233, 7, 1105))
+          end
         end
-    else
-        if CheckNameBoss("Cake Queen [Lv. 2175] [Boss]")  then
-            local v = CheckNameBoss("Cake Queen [Lv. 2175] [Boss]")
-            repeat task.wait()
-                sizepart(v)
-                toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position,v.HumanoidRootPart.Position,v.HumanoidRootPart.CFrame*CFrame.new(7,20,0))
-                if (plr.Character.HumanoidRootPart.Position-v.HumanoidRootPart.Position).Magnitude < 50 then
-                    DetectFastAttack()
-                end
-                equiptool(NameWeapon("Sword"))
-            until not v or not v.Parent or v.Humanoid.Health == 0 
-            if getgenv().Tween then
-                getgenv().Tween:Pause()
-                getgenv().Tween:Cancel()
-            end
+      end
     end
-end
-function QuestEvil3()
-    local mob
-    for i,v in next,game.workspace.Enemies:GetChildren() do
-        if v:IsA("Model") and v.Name == "Marine Commodore [Lv. 1700]"  and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-            mob = v
+  end)
+ 
+  -- Yama Quest 2
+  task.spawn(function()
+    while getgenv().AutoCursedDualKatana do task.wait()
+      if YamaQuest_2 then
+        local Enemie = GetYamaEnemies()
+        
+        if Enemie and Enemie:FindFirstChild("HumanoidRootPart") then
+          PlayerTP(Enemie.HumanoidRootPart.CFrame + getgenv().FarmPos)
+          pcall(function()PlayerClick()ActiveHaki()EquipTool()BringNPC(Enemie)end)
         end
+      end
     end
-    if not mob then
-        GetPart = DetectPartSpawnMob("Marine Commodore [Lv. 1700]")
-        toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position,GetPart.Position,GetPart.CFrame*CFrame.new(0,60,0))
-    else
-        repeat task.wait()
-            toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position,mob.HumanoidRootPart.Position,mob.HumanoidRootPart.CFrame*CFrame.new(0,0,3))
-        until plr.Character.Humanoid.Health <= 0
+  end)
+  -- Yama Quest 3
+  task.spawn(function()
+    while getgenv().AutoCursedDualKatana do task.wait()
+      if YamaQuest_3 then
+      end
     end
-end
-function DetectMobPhaze()
-    local xx 
-    for i,v in next,game.workspace.Enemies:GetChildren() do
-        if v:IsA("Model")  and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("HazeESP")
-        and  v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0  then
-            xx = v
+  end)
+  -- Tushita Quest 1
+  task.spawn(function()
+    local NPCs = workspace:WaitForChild("NPCs", 9e9)
+    
+    local Boat1, Boat2, Boat3 = false, false, false
+    
+    while getgenv().AutoCursedDualKatana do task.wait()
+      if TushitaQuest_1 then
+        local plrPP = Player and Player.Character and Player.Character.PrimaryPart
+        local NPC = NPCs:FindFirstChild("Luxury Boat Dealer")
+        
+        if not Boat1 and plrPP and NPC then
+          if (plrPP.Position - Vector3.new()).Magnitude < 5 then
+            FireRemote("CDKQuest", "BoatQuest", NPC)Boat1 = true
+          else
+            PlayerTP(CFrame.new(-9546, 21, 4686))
+          end
+        elseif not Boat2 and plrPP and NPC then
+          if (plrPP.Position - Vector3.new()).Magnitude < 5 then
+            FireRemote("CDKQuest", "BoatQuest", NPC)Boat2 = true
+          else
+            PlayerTP(CFrame.new(-6120, 16, -2250))
+          end
+        elseif not Boat3 and plrPP and NPC then
+          if (plrPP.Position - Vector3.new()).Magnitude < 5 then
+            FireRemote("CDKQuest", "BoatQuest", NPC)Boat3 = true
+          else
+            PlayerTP(CFrame.new(-9533, 7, -8372))
+          end
         end
+      end
     end
-    return xx
-end
-function checknearstpartmobspawn()
-    for i,v in next,game:GetService("Players").LocalPlayer.QuestHaze:GetChildren() do
-        if v.Value > 0 then
-            return v.Name
+  end)
+  -- Tushita Quest 2
+  task.spawn(function()
+    while getgenv().AutoCursedDualKatana do task.wait()
+      if TushitaQuest_2 then     
+      end
+    end
+  end)
+  -- Tushita Quest 3
+  task.spawn(function()
+    while getgenv().AutoCursedDualKatana do task.wait()
+      if TushitaQuest_3 then
+      end
+    end
+  end)
+  task.spawn(function()
+    while getgenv().AutoCursedDualKatana do task.wait()
+      if VerifyTool("Yama") then
+        local NewMastery = GetToolLevel("Yama")
+        if tonumber(NewMastery) then
+          MasteryYama = NewMastery
         end
+      elseif VerifyTool("Tushita") then
+        local NewMastery = GetToolLevel("Tushita")
+        if tonumber(NewMastery) then
+          MasteryTushita = NewMastery
+        end
+      end
     end
-end
-
-function QuestEvil4()
-    if  DetectMob(checknearstpartmobspawn()) then
-        local v = DetectMob(checknearstpartmobspawn())
-        repeat task.wait()
-            sizepart(v)
-            toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position,v.HumanoidRootPart.Position,v.HumanoidRootPart.CFrame*CFrame.new(7,20,0))
-            if (plr.Character.HumanoidRootPart.Position-v.HumanoidRootPart.Position).Magnitude < 50 then
-                DetectFastAttack()
-            end
-            equiptool(NameWeapon("Sword"))
-            task.spawn(function()
-                BringMob(v)
-            end)
-        until not v or not v.Parent or v.Humanoid.Health == 0 
-    else
-        GetPart = DetectPartSpawnMob(checknearstpartmobspawn())
-        toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position,GetPart.Position,GetPart.CFrame*CFrame.new(0,15,0))
-    end
-end
-function TourchEvil5()
-    local a 
-    if not game:GetService("Workspace").Map.HellDimension.Torch1:FindFirstChild("mmb") then
-        a = "1"
-    elseif not game:GetService("Workspace").Map.HellDimension.Torch2:FindFirstChild("mmb") then
-        a = "2"
-    elseif not game:GetService("Workspace").Map.HellDimension.Torch3:FindFirstChild("mmb") then
-        a = "3"
-    end
-    return a 
-end
-function QuestEvil5()
-    if (game:GetService("Workspace")["_WorldOrigin"].Locations["Hell Dimension"].Position-plr.Character.HumanoidRootPart.Position).Magnitude > 1000 then
-        if not CheckNameBoss("Soul Reaper [Lv. 2100] [Raid Boss]") then
-            if not plr.Character:FindFirstChild("Hallow Essence") and not plr.Backpack:FindFirstChild("Hallow Essence") then
-                if not DetectMob(TableMobBones) then 
-                    TeleportSpawnMob(TableMobBones,OrionLib.Flags["Cursed Dual Katana"].Value)
-                else
-                    local v = DetectMob(TableMobBones)
-                    repeat task.wait()
-                        sizepart(v)
-                        toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position,v.HumanoidRootPart.Position,v.HumanoidRootPart.CFrame*CFrame.new(7,20,0))
-                        if (plr.Character.HumanoidRootPart.Position-v.HumanoidRootPart.Position).Magnitude < 50 then
-                            DetectFastAttack()
-                        end
-                        equiptool(NameWeapon("Sword"))
-                        task.spawn(function()
-                            BringMob(v)
-                        end)
-                    until not v or not v.Parent or v.Humanoid.Health == 0  or not OrionLib.Flags["Cursed Dual Katana"].Value
-                end
-            else
-                if (plr.Character.HumanoidRootPart.Position-game:GetService("Workspace").Map["Haunted Castle"].Summoner.Detection.Position).Magnitude > 8 then
-                    toTarget(plr.Character.HumanoidRootPart.Position,game:GetService("Workspace").Map["Haunted Castle"].Summoner.Detection.Position,game:GetService("Workspace").Map["Haunted Castle"].Summoner.Detection.CFrame)
-                else
-                    equiptool("Hallow Essence",true) 
-                end
-            end
+  end)
+  task.spawn(function()
+    while getgenv().AutoCursedDualKatana do task.wait()
+      if FarmMastery then
+        if MasteryYama >= 350 and MasteryTushita >= 350 then
+          break
+        end
+        if not VerifyTool("Yama") and MasteryYama < 350 then
+          Remote:InvokeServer("LoadItem", "Yama")
+        elseif not VerifyTool("Tushita") and MasteryTushita < 350 then
+          Remote:InvokeServer("LoadItem", "Tushita")
+        end
+        
+        local Enemie = GetMasteryEnemies()EquipToolName("Yama")EquipToolName("Tushita")
+        
+        if Enemie then
+          PlayerTP(Enemie.HumanoidRootPart.CFrame + getgenv().FarmPos)
+          pcall(function()PlayerClick()ActiveHaki()EquipTool()BringNPC(Enemie, true)end)
         else
-            local v = CheckNameBoss("Soul Reaper [Lv. 2100] [Raid Boss]")
-            repeat task.wait()
-                toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position,v.HumanoidRootPart.Position,v.HumanoidRootPart.CFrame*CFrame.new(0,0,3))
-            until   plr.Character.Humanoid.Health <= 0  or (game:GetService("Workspace")["_WorldOrigin"].Locations["Hell Dimension"].Position-plr.Character.HumanoidRootPart.Position).Magnitude < 1000
-            if getgenv().Tween then
-                getgenv().Tween:Pause()
-                getgenv().Tween:Cancel()
-            end
+          PlayerTP(CFrame.new(-9513, 164, 5786))
         end
+      end
+    end
+  end)
+    
+  task.spawn(function()
+    local function ConvertNumber(Number)
+      local NumberStr = tostring(Number)
+      NumberStr = string.gsub(NumberStr, "2", "3")
+      NumberStr = string.gsub(NumberStr, "1", "2")
+      NumberStr = string.gsub(NumberStr, "0", "1")
+      NumberStr = string.gsub(NumberStr, "-2", "1")
+      NumberStr = string.gsub(NumberStr, "-4", "2")
+      NumberStr = string.gsub(NumberStr, "-6", "2")
+      return tonumber(NumberStr)
+    end
+    
+    while getgenv().AutoCursedDualKatana do task.wait(0.5)
+      local Progress = Remote:InvokeServer("CDKQuest", "Progress")
+      
+      GoodProgress = ConvertNumber(Progress.Good)
+      EvilProgress = ConvertNumber(Progress.Evil)
+    end
+  end)
+    
+  while getgenv().AutoCursedDualKatana do task.wait()
+    local Door = Cursed:FindFirstChild("Breakable")
+    
+    if MasteryTushita < 350 and MasteryYama < 350 then
+      FinalQuest, FarmMastery = false, true
+      YamaQuest_1, YamaQuest_2, YamaQuest_3 = false, false, false
+      TushitaQuest_1, TushitaQuest_2, TushitaQuest_3 = false, false, false
+    elseif Door then
+      Remote:InvokeServer("CDKQuest", "OpenDoor")
+      Remote:InvokeServer("CDKQuest", "OpenDoor", true)
+    elseif EvilProgress == 1 then
+      FinalQuest, FarmMastery = false, false
+      YamaQuest_1, YamaQuest_2, YamaQuest_3 = true, false, false
+      TushitaQuest_1, TushitaQuest_2, TushitaQuest_3 = false, false, false
+      Remote:InvokeServer("CDKQuest", "Progress", "Evil")Remote:InvokeServer("CDKQuest", "StartTrial", "Evil")
+    elseif EvilProgress == 2 then
+      FinalQuest, FarmMastery = false, false
+      YamaQuest_1, YamaQuest_2, YamaQuest_3 = false, true, false
+      TushitaQuest_1, TushitaQuest_2, TushitaQuest_3 = false, false, false
+      Remote:InvokeServer("CDKQuest", "Progress", "Evil")Remote:InvokeServer("CDKQuest", "StartTrial", "Evil")
+    elseif EvilProgress == 3 then
+      FinalQuest, FarmMastery = false, false
+      YamaQuest_1, YamaQuest_2, YamaQuest_3 = false, false, true
+      TushitaQuest_1, TushitaQuest_2, TushitaQuest_3 = false, false, false
+      Remote:InvokeServer("CDKQuest", "Progress", "Evil")Remote:InvokeServer("CDKQuest", "StartTrial", "Evil")
+    elseif GoodProgress == 1 then
+      FinalQuest, FarmMastery = false, false
+      YamaQuest_1, YamaQuest_2, YamaQuest_3 = false, false, false
+      TushitaQuest_1, TushitaQuest_2, TushitaQuest_3 = true, false, false
+      Remote:InvokeServer("CDKQuest", "Progress", "Good")Remote:InvokeServer("CDKQuest", "StartTrial", "Good")
+    elseif GoodProgress == 2 then
+      FinalQuest, FarmMastery = false, false
+      YamaQuest_1, YamaQuest_2, YamaQuest_3 = false, false, false
+      TushitaQuest_1, TushitaQuest_2, TushitaQuest_3 = false, true, false
+      Remote:InvokeServer("CDKQuest", "Progress", "Good")Remote:InvokeServer("CDKQuest", "StartTrial", "Good")
+    elseif GoodProgress == 3 then
+      FinalQuest, FarmMastery = false, false
+      YamaQuest_1, YamaQuest_2, YamaQuest_3 = false, false, false
+      TushitaQuest_1, TushitaQuest_2, TushitaQuest_3 = false, false, false
+      Remote:InvokeServer("CDKQuest", "Progress", "Good")Remote:InvokeServer("CDKQuest", "StartTrial", "Good")
     else
-        if game:GetService("Workspace").Map.HellDimension.Exit.BrickColor == BrickColor.new("Olivine") then
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.HellDimension.Exit.CFrame
-            toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position,game:GetService("Workspace").Map.HellDimension.Exit.Position,game:GetService("Workspace").Map.HellDimension.Exit.CFrame)
-            return 
-        end	
-        if game.workspace.Enemies:FindFirstChildWhichIsA("Model") then			
-            for i,v in next,game.Workspace.Enemies:GetChildren() do
-                if v:IsA("Model") then 
-                    v.Humanoid.Health = 0
-                    plr.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame*CFrame.new(0,50,0)
-                end
-            end
-        else
-            local Tourch = TourchEvil5()
-            if Tourch then
-                repeat task.wait()
-                    if (plr.Character.HumanoidRootPart.Position-game:GetService("Workspace").Map.HellDimension["Torch"..Tourch].Position).Magnitude > 5 then 
-                        toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position,game:GetService("Workspace").Map.HellDimension["Torch"..Tourch].Position,game:GetService("Workspace").Map.HellDimension["Torch"..Tourch].CFrame)
-                    else
-                        fireproximityprompt(game:GetService("Workspace").Map.HellDimension["Torch"..Tourch].ProximityPromptm,0)
-                        fireproximityprompt(game:GetService("Workspace").Map.HellDimension["Torch"..Tourch].ProximityPromptm,1)
-                    end 
-                until game.workspace.Enemies:FindFirstChildWhichIsA("Model")
-                plr.Character.HumanoidRootPart.CFrame = plr.Character.HumanoidRootPart.CFrame*CFrame.new(0,50,0)
-                local BV = Instance.new("Part")
-                BV.Parent = game:GetService("Workspace").Map.HellDimension["Torch"..Tourch]
-                BV.Name = "mmb"
-            end
-        end
+      FinalQuest, FarmMastery = true, false
+      YamaQuest_1, YamaQuest_2, YamaQuest_3 = false, false, false
+      TushitaQuest_1, TushitaQuest_2, TushitaQuest_3 = false, false, false
     end
-end
-function checkswordttk(xx,xxx)
-    for i,v in next,getupvalues(require(game:GetService("Players").LocalPlayer.PlayerGui.Main.UIController.Inventory).UpdateRender) do
-        if i == 4 then
-            for i1,v1 in next,v do
-                if v1.details.Name == xx and  v1.details.Mastery >= xxx then
-                    return true
-                end
-            end
-        end
-    end
-    return false
-end
-function CheckItemInventory(b)
-    for i,v in pairs(game.ReplicatedStorage.Remotes["CommF_"]:InvokeServer("getInventory")) do
-        if v.Name == b then
-            return true
-        end
-    end
-end
-function GetCDK()
-    if not CheckItemInventory("Tushita")  or not CheckItemInventory("Yama") then 
-    end
-    if CheckItemInventory("Tushita")  and CheckItemInventory("Yama") then
-        if not checkswordttk("Yama",350) or not checkswordttk("Tushita",350) then 
-        end
-        if not plr.Character:FindFirstChild("Tushita") 
-        and not plr.Backpack:FindFirstChild("Tushita") 
-        and not plr.Character:FindFirstChild("Yama") 
-        and not plr.Backpack:FindFirstChild("Yama") then
-            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LoadItem","Tushita")
-            return 
-        end
-        getgenv().Good = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("CDKQuest", "Progress", "Good").Good
-        getgenv().Evil = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("CDKQuest", "Progress", "Good").Evil
-        if Auto_Cursed_Dual_Katana then 
-            game.ReplicatedStorage.Remotes.CommF_:InvokeServer("CDKQuest", "StartTrial", "Good")
-        else
-            game.ReplicatedStorage.Remotes.CommF_:InvokeServer("CDKQuest", "StartTrial", "Evil")
-        end
-        if getgenv().Good == 4 then
-            Auto_Cursed_Dual_Katana =  false
-        end
-        local Pedestal
-        if getgenv().Good == 4 
-        and  getgenv().Evil == 3 then
-            Pedestal = "Pedestal2"
-        elseif getgenv().Good == 3 
-        and  getgenv().Evil == 4 then
-            Pedestal = "Pedestal1"
-        end
-        if Pedestal  then
-            if (game:GetService("Workspace").Map.Turtle.Cursed[Pedestal].Position-plr.Character.HumanoidRootPart.Position).Magnitude < 10 then
-                fireproximityprompt(game:GetService("Workspace").Map.Turtle.Cursed[Pedestal].ProximityPrompt)
-            else
-                toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position,game:GetService("Workspace").Map.Turtle.Cursed[Pedestal].Position,game:GetService("Workspace").Map.Turtle.Cursed[Pedestal].CFrame)
-            end
-        end
-        if plr.PlayerGui.Main.Dialogue.Visible then
-            game.VirtualUser:Button1Down(Vector2.new(0, 0))
-            game.VirtualUser:Button1Down(Vector2.new(0, 0))
-        end
-        if getgenv().Good == 4 
-        and getgenv().Evil == 4 then
-            if (game:GetService("Workspace").Map.Turtle.Cursed.Pedestal3.Position-plr.Character.HumanoidRootPart.Position).Magnitude  > 10 then
-                toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position,game:GetService("Workspace").Map.Turtle.Cursed.Pedestal3.Position,game:GetService("Workspace").Map.Turtle.Cursed.Pedestal3.CFrame)
-            else
-                if game:GetService("Workspace").Map.Turtle.Cursed.PlacedGem.Transparency == 0 then
-                    if not game.Workspace.Enemies:FindFirstChild("Cursed Skeleton Boss [Lv. 2025] [Boss]") then
-                        toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position,Vector3.new(-12341.66796875, 603.3455810546875, -6550.6064453125),CFrame.new(-12341.66796875, 603.3455810546875, -6550.6064453125))
-                    else
-                        for i,v in next,game.Workspace.Enemies:GetChildren() do
-                            if v:IsA("Model") and v.Name == "Cursed Skeleton Boss [Lv. 2025] [Boss]" and v.Humanoid.Health > 0 then
-                                repeat task.wait()
-                                    sizepart(v)
-                                    toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position,v.HumanoidRootPart.Position,v.HumanoidRootPart.CFrame*CFrame.new(7,20,0))
-                                    if (plr.Character.HumanoidRootPart.Position-v.HumanoidRootPart.Position).Magnitude < 50 then
-                                        DetectFastAttack()
-                                    end
-                                    equiptool(NameWeapon("Sword"))
-                                until  not v or not v.Parent or v.Humanoid.Health <= 0 
-                            end
-                        end
-                    end
-                else
-                    fireproximityprompt(game:GetService("Workspace").Map.Turtle.Cursed.Pedestal3.ProximityPrompt)
-                end
-            end
-        end
-        if Auto_Cursed_Dual_Katana then
-            if getgenv().Good == -3 then
-                QuestGood3()
-            elseif getgenv().Good == -4 then 
-                QuestGood4()
-            elseif getgenv().Good == -5 then 
-                Questgood5()
-            end
-        else
-            if getgenv().Evil == -3 then 
-                QuestEvil3()
-            elseif getgenv().Evil == -4 then  
-                QuestEvil4()
-            elseif getgenv().Evil == -5 then
-                spawn(function()
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Bones","Buy",1,1)
-                end) 
-                QuestEvil5()
-            end
-        end
-    end
+  end
 end
     Toggle = Tabs.stack:AddToggle("MyToggle", {Title = "Auto Soul Guitar Quest", Default = _G.QuestSoulGuitar })
     Toggle:OnChanged(function(Value)
