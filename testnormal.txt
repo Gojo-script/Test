@@ -1,5 +1,3 @@
-
-
 if not game:IsLoaded() then 
     local Message = Instance.new("Message", workspace)
     Message.Text = "Normal Hub : Waiting game to loaded"
@@ -3728,7 +3726,7 @@ old = hookfunction(Instance.new("RemoteFunction").InvokeServer,function(...)
     return old(...)
 end)
 
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/WxHxCxKxExR/Normal_Pc/main/mt"), true))();
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/Tgoduiem/Test/main/mt.txt"), true))();
 
 function PositionToCFrame(para)
     return CFrame.new(para.X,para.Y,para.Z)
