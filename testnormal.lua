@@ -1,4 +1,4 @@
-(getgenv()).Key = "NORMALHUB_oc8S5F";
+(getgenv()).Key = "NORMALHUB";
 (getgenv()).DiscordID = "1067982398026960936";
 if Fluxus then
     local AntiCrackTool = 0;
