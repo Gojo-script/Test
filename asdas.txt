@@ -3734,7 +3734,7 @@ old = hookfunction(Instance.new("RemoteFunction").InvokeServer,function(...)
     return old(...)
 end)
 
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/Tgoduiem/Test/main/mt.txt), true))();
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/Tgoduiem/Test/main/mt.lua"), true))();
 
 function PositionToCFrame(para)
     return CFrame.new(para.X,para.Y,para.Z)
