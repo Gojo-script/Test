@@ -11,7 +11,7 @@ end
 game.StarterGui:SetCore(
     "SendNotification",
     {
-        Title = "HadesGod",
+        Title = "Gojo | God",
         Text = "Loading",
         Duration = 5
     })
