@@ -607,21 +607,7 @@ function ToggleNoclip()
         return true 
     end
 end
-        function isnetworkowner(p1)
-            local A = gethiddenproperty(plr,"SimulationRadius")
-            local B = plr.Character or Wait(plr.CharacterAdded)
-            local C = game.WaitForChild(B, "HumanoidRootPart", 300)
-            if C then
-                if p1.Anchored then
-                    return false
-                end
-                if game.IsDescendantOf(p1, B) or (C.Position - p1.Position).Magnitude <= A then
-                    return true
-                end
-            end
-            return false
-        end
-    end
+       
     function CreateTweenFloat()
         if not plr.Character.HumanoidRootPart:FindFirstChild("EffectsSY") then
             local BV = Instance.new("BodyVelocity")
