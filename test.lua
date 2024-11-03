@@ -1247,11 +1247,11 @@ local function getTextoforLabel()
 end
 
 -- UI 
-local library = loadstring(game:HttpGet("https://pastebin.com/raw/t3LkswWP"))()
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Tgoduiem/Test/refs/heads/main/LIB.txt"))()
 local Win = library:XoxHi({
-	Title = "Zee Hub | King Legacy | Youtube:Zuwz", -- Your Name Hub
+	Title = "Pear CAT Hub | King Legacy | By Tgodzskid", -- Your Name Hub
 	Logo = "16330128588", -- Your Id Logo
-	Dis = "TO ZEE HUB | KING LEGACY",
+	Dis = "TO Pear cat HUB | KING LEGACY",
 	Color = {
 		Color1 = Color3.fromRGB(255, 0, 4),
 		Color2 = Color3.fromRGB(100, 0, 0),
