@@ -46,7 +46,7 @@ end
 local SoundEffect = function()
 	local SoundClick = Instance.new("Sound")
 	SoundClick.Name = "SoundEffect"
-	SoundClick.SoundId = "rbxassetid://9120093634"
+	SoundClick.SoundId = "rbxassetid://9954657241944"
 	SoundClick.Volume = .5
 	SoundClick.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
 	SoundClick:Play()
