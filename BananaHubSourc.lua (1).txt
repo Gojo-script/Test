@@ -622,7 +622,6 @@ if syn   then
         end)
     end)
 else
-    setfflag("HumanoidParallelRemoveNoPhysics", "False")
     setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
     if Fluxus then 
         function isnetworkowner2(p1)
