@@ -23,7 +23,7 @@ wait(1)
 vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 end)
 getgenv().OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/obiiyeuem/vthangsitink/09496ef4e05834597fea517fa709f3d9e7aaa83c/skidcongaimetuimay.lua')))()
-local Window = OrionLib:MakeWindow({Name = "Banana Hub",IntroText = "Banana Library"})
+local Window = OrionLib:MakeWindow({Name = "Galaxy Hub",IntroText = "Galaxy Hub🪐"})
 local Tab7 = Window:MakeTab({
 	Name = "Shop",
 	Icon = "rbxassetid://4483345998",
